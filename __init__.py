@@ -18,7 +18,7 @@ from pymusement.parks.seaworld.BuschGardensWilliamsburg import BuschGardensWilli
 from pymusement.parks.HersheyPark import HersheyPark
 
 
-PARKS = {
+Parks = {
     'magic-kingdom' : MagicKingdom(),
     'epcot' : Epcot(),
     'hollywood-studios' : HollywoodStudios(),
