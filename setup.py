@@ -15,6 +15,7 @@ setup(name='pymusement',
       long_description_content_type="text/markdown",
       packages=find_packages(),
       include_package_data=True,
+      download_url = 'https://github.com/TheMarauder95/pymusement/archive/0.0.16.tar.gz'
       install_requires=[
         'requests',
         'beautifulsoup4',
