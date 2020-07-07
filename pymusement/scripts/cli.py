@@ -1,5 +1,5 @@
 import click
-from pymusement import Parks
+from pymusement import PARKS
 
 @click.command()
 @click.argument('name', nargs=1, type=click.Choice(PARKS.keys()))
