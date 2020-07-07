@@ -91,7 +91,7 @@ class UniversalPark(Park):
         KEY    = 'AndroidMobileApp'
         SECRET = b'AndroidMobileAppSecretKey182014'
 
-       date = datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
+        date = datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
         secret_test = "{KEY}\n{date}\n".format(KEY=KEY, date=date)
         digest = hmac.new(SECRET, secret_test.encode('ascii'), hashlib.sha256)
         signature = base64.b64encode(digest.digest()).strip()
