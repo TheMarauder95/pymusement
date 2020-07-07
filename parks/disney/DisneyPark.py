@@ -143,8 +143,8 @@ class DisneyPark(Park):
                     # print(e)
                     continue
         ride_link = self._url + '/wait-times'
-        page = requests.get(self._url, headers=headers, verify=False)
-        response = requests.get(ride_link, headers=headers, verify=False)
+        page = requests.get(self._url, headers=headers)
+        response = requests.get(ride_link, headers=headers)
         print(response)
         
         return page

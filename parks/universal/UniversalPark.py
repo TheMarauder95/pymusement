@@ -109,5 +109,5 @@ class UniversalPark(Park):
 
         headers.update(SHARED_HEADERS)
 
-        r = requests.post('https://services.universalorlando.com/api', headers=headers, data=json.dumps(params, ensure_ascii=False), verify=False)
+        r = requests.post('https://services.universalorlando.com/api', headers=headers, data=json.dumps(params, ensure_ascii=False))
         return r.json()['Token']
