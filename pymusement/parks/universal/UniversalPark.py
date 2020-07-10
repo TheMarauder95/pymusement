@@ -55,7 +55,12 @@ class UniversalPark(Park):
         if ride['WaitTime'] == -50:
             attraction.setTime(0)
         if ride['WaitTime'] == -9:
+        
             attraction.setOpen()
+            attraction.setTime(-9)
+        elif ride['WaitTime'] == -7
+            attraction.setTime(0)
+            atraction.setOpen()
         elif ride['WaitTime'] < 0:
             attraction.setClosed()
             
