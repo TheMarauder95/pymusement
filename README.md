@@ -1,6 +1,6 @@
 # PyMusement
 A python package and CLI to get wait times for rides at various theme parks
-
+test
 ## Example
 ### CLI
 Get wait times right from your terminal
