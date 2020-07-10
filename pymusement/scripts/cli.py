@@ -27,7 +27,10 @@ def print_rides(ride_array):
             line += 'Closed'
 
         line += ' ' * 5
-        line += str(ride['wait']) + ' mins'
+        if ride['wait'] == -9:
+            line += 'Virtual Line'
+        else:
+            line += str(ride['wait']) + ' mins'
         click.echo(line)
 
 def print_shows(show_array):
