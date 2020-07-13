@@ -67,7 +67,9 @@ class UniversalPark(Park):
 
         elif ride['WaitTime'] is not None:
             attraction.setTime(ride['WaitTime'])
-
+        
+        
+        print (ride.keys())
         self.addRide(attraction)
 
     def _make_show(self, show):
