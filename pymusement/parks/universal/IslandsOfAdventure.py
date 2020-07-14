@@ -7,5 +7,8 @@ class IslandsOfAdventure(UniversalPark):
     def getId(self):
         return 10000
 
+    def getCity(self):
+        return 'Orlando'
+
     def getName(self):
         return 'Islands of Adventure'

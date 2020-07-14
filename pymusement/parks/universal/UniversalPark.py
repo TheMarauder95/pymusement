@@ -58,7 +58,7 @@ class UniversalPark(Park):
         
             attraction.setOpen()
             attraction.setTime(-9)
-        elif ride['WaitTime'] == -7
+        elif ride['WaitTime'] == -7:
             attraction.setTime(0)
             atraction.setOpen()
         elif ride['WaitTime'] < 0:
@@ -68,8 +68,10 @@ class UniversalPark(Park):
         elif ride['WaitTime'] is not None:
             attraction.setTime(ride['WaitTime'])
         
+        attraction.setVirtualLine(ride['VirtualLine'])
         
-        print (ride.keys())
+        
+        
         self.addRide(attraction)
 
     def _make_show(self, show):
