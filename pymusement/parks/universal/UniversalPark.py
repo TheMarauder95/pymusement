@@ -46,26 +46,41 @@ class UniversalPark(Park):
     def _make_attraction(self, ride):
         attraction = Ride()
         attraction.setName(ride['MblDisplayName'])
-
+        
         if ride['WaitTime'] is None:
             attraction.setClosed()
         else:
             attraction.setOpen()
 
         if ride['WaitTime'] == -50:
-            attraction.setTime(0)
+            attraction.setTime(-1)
+            attraction.setStatus('Unknown')
+            attraction.setClosed()
         if ride['WaitTime'] == -9:
-        
             attraction.setOpen()
-            attraction.setTime(-9)
+            attraction.setTime(0)
+            attraction.setStatus('VLO')
+        elif ride['WaitTime'] == -8:
+            attraction.setClosed()
+            attraction.setTime(-1)
+            attraction.setStatus('Not Open Yet')
         elif ride['WaitTime'] == -7:
             attraction.setTime(0)
-            atraction.setOpen()
+            attraction.setOpen()
+        elif ride['WaitTime'] == -5:
+            attraction.setClosed()
+            attraction.setTime(-1)
+            attraction.setStatus('Capacity')
+        elif ride['WaitTime'] == -4:
+            attraction.setClosed()
+            attraction.setStatus('Weather')
         elif ride['WaitTime'] < 0:
             attraction.setClosed()
+            attraction.setTime(-1)
+            attraction.setStatus('Closed')
             
 
-        elif ride['WaitTime'] is not None:
+        else:
             attraction.setTime(ride['WaitTime'])
         
         attraction.setVirtualLine(ride['VirtualLine'])
