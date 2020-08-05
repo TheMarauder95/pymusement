@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 
 setup(name='pymusement',
-      version='0.1.4',
+      version='0.1.5',
       description='A python package and CLI to get wait times for rides at various theme parks',
       url='https://github.com/TheMarauder95/PyMusement',
       author='Josh Shrawder',
