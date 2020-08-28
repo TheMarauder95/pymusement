@@ -9,7 +9,14 @@ class Park(object):
         self._rides = []
         self._shows = []
         self._time = datetime.datetime.now()
+        self.is_Open = False
 
+    def set_open(self):
+        self.is_Open = True
+        
+    def set_closed(self):
+        self.is_Open = False
+        
     def rides(self):
         if self._rides == []:
             self._buildPark()

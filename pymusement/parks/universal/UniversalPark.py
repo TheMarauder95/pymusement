@@ -23,6 +23,8 @@ SHARED_HEADERS = {
 
 RIDE_URL = 'https://services.universalorlando.com/api/pointsofinterest/rides'
 SHOW_URL = 'https://services.universalorlando.com/api/pointsofinterest/Shows'
+HOUR_URL = 'https://services.universalorlando.com/api/venues/{0}/hours'
+
 class UniversalPark(Park):
     def __init__(self):
         super(UniversalPark, self).__init__()
@@ -31,7 +33,14 @@ class UniversalPark(Park):
         token = self._get_token()
         ride_page = self._get_request(token, RIDE_URL)
         show_page = self._get_request(token, SHOW_URL)
+        hour_page = self._get_request(token, HOUR_URL.format(self.getId()))
         
+        for date in hour_page:
+            if datetime.date.fromisoformat(date['Date']) == datetime.date.today():
+                open_time, close_time = datetime.datetime.fromisoformat(date['OpenTimeString']), datetime.datetime.fromisoformat(date['CloseTimeString'])
+                if open_time < datetime.datetime.now().astimezone() < close_time:
+                    self.set_open()
+                else:self.set_closed()
         
         for ride in ride_page['Results']:
             if ride['VenueId'] == self.getId():
