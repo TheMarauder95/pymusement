@@ -82,6 +82,7 @@ class UniversalPark(Park):
             attraction.setStatus('Capacity')
         elif ride['WaitTime'] == -4:
             attraction.setClosed()
+            attraction.setTime(-1)
             attraction.setStatus('Weather')
         elif ride['WaitTime'] < 0:
             attraction.setClosed()
