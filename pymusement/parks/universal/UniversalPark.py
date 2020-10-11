@@ -28,7 +28,7 @@ HOUR_URL = 'https://services.universalorlando.com/api/venues/{0}/hours'
 class UniversalPark(Park):
     def __init__(self):
         super(UniversalPark, self).__init__()
-
+        
     def _buildPark(self):
         token = self._get_token()
         ride_page = self._get_request(token, RIDE_URL)
@@ -37,10 +37,15 @@ class UniversalPark(Park):
         
         for date in hour_page:
             if datetime.date.fromisoformat(date['Date']) == datetime.date.today():
+                if date['VenueStatus'] = 'Closed Due to Capacity':self.Capacity = True
+                else: self.Capacity = False
                 open_time, close_time = datetime.datetime.fromisoformat(date['OpenTimeString']), datetime.datetime.fromisoformat(date['CloseTimeString'])
                 if open_time < datetime.datetime.now().astimezone() < close_time:
                     self.set_open()
-                else:self.set_closed()
+                    break
+                else:
+                    self.set_closed()
+                    break
         
         for ride in ride_page['Results']:
             if ride['VenueId'] == self.getId():

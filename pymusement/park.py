@@ -10,7 +10,7 @@ class Park(object):
         self._shows = []
         self._time = datetime.datetime.now()
         self.is_Open = False
-
+        self.Capacity = False
     def set_open(self):
         self.is_Open = True
         
