@@ -37,8 +37,14 @@ class UniversalPark(Park):
         
         for date in hour_page:
             if datetime.date.fromisoformat(date['Date']) == datetime.date.today():
-                if date['VenueStatus'] = 'Closed Due to Capacity':self.Capacity = True
-                else: self.Capacity = False
+                if date['VenueStatus'] == 'Closed Due to Capacity':
+                    self.Capacity = True
+                    break
+                else:
+                    self.Capacity = False
+                    break
+        
+        for date in hour_page:
                 open_time, close_time = datetime.datetime.fromisoformat(date['OpenTimeString']), datetime.datetime.fromisoformat(date['CloseTimeString'])
                 if open_time < datetime.datetime.now().astimezone() < close_time:
                     self.set_open()
