@@ -46,7 +46,9 @@ class UniversalPark(Park):
         token = self._get_token()
         ride_page = self._get_request(token, RIDE_URL)
         show_page = self._get_request(token, SHOW_URL)
+        hour_page = self._get_request(token, HOUR_URL.format(self.getId()))
         
+        self.get_capacity()
         
         for date in hour_page:
                 open_time, close_time = datetime.datetime.fromisoformat(date['OpenTimeString']), datetime.datetime.fromisoformat(date['CloseTimeString'])
