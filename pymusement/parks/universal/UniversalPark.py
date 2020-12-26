@@ -35,7 +35,7 @@ class UniversalPark(Park):
         
         for date in hour_page:
             if datetime.date.fromisoformat(date['Date']) == datetime.date.today():
-                if date['VenueStatus'] == 'At Capacity':
+                if 'capacity' in date['VenueStatus'].lower():
                     self.Capacity = True
                     break
                 else:
