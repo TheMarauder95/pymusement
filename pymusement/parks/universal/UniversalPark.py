@@ -29,6 +29,13 @@ class UniversalPark(Park):
     def __init__(self):
         super(UniversalPark, self).__init__()
     
+    def get_park_hours(self):
+        if self.park_hours:
+            return self.park_hours
+        else:
+            self._buildPark()
+            return self.park_hours
+
     def get_capacity(self):
         token = self._get_token()
         hour_page = self._get_request(token, HOUR_URL.format(self.getId()))
@@ -52,17 +59,20 @@ class UniversalPark(Park):
         
         for date in hour_page:
                 open_time, close_time = datetime.datetime.fromisoformat(date['OpenTimeString']), datetime.datetime.fromisoformat(date['CloseTimeString'])
+
                 if open_time < datetime.datetime.now().astimezone() < close_time:
                     self.set_open()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
                     break
                 else:
                     self.set_closed()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
                     break
         
         for ride in ride_page['Results']:
             if ride['VenueId'] == self.getId():
                 self._make_attraction(ride)
-
+    
         
         for show in show_page['Results']:
             if show['VenueId'] == self.getId():
