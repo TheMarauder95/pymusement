@@ -6,7 +6,10 @@ class BuschGardensTampa(SeaworldPark):
         super(BuschGardensTampa, self).__init__()
 
     def getId(self):
-        return 'BG_TPA'
+        return 'buschgardens'
 
     def getName(self):
         return 'Busch Gardens Tampa'
+        
+    def getCity(self):
+        return 'tampa'

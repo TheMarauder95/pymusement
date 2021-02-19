@@ -23,20 +23,56 @@ SHARED_HEADERS = {
 
 RIDE_URL = 'https://services.universalorlando.com/api/pointsofinterest/rides'
 SHOW_URL = 'https://services.universalorlando.com/api/pointsofinterest/Shows'
+HOUR_URL = 'https://services.universalorlando.com/api/venues/{0}/hours'
+
 class UniversalPark(Park):
     def __init__(self):
         super(UniversalPark, self).__init__()
+    
+    def get_park_hours(self):
+        if self.park_hours:
+            return self.park_hours
+        else:
+            self._buildPark()
+            return self.park_hours
 
+    def get_capacity(self):
+        token = self._get_token()
+        hour_page = self._get_request(token, HOUR_URL.format(self.getId()))
+        
+        for date in hour_page:
+            if datetime.date.fromisoformat(date['Date']) == datetime.date.today():
+                if 'capacity' in date['VenueStatus'].lower():
+                    self.Capacity = True
+                    break
+                else:
+                    self.Capacity = False
+                    break
+    
     def _buildPark(self):
         token = self._get_token()
         ride_page = self._get_request(token, RIDE_URL)
         show_page = self._get_request(token, SHOW_URL)
+        hour_page = self._get_request(token, HOUR_URL.format(self.getId()))
         
+        self.get_capacity()
+        
+        for date in hour_page:
+                open_time, close_time = datetime.datetime.fromisoformat(date['OpenTimeString']), datetime.datetime.fromisoformat(date['CloseTimeString'])
+
+                if open_time < datetime.datetime.now().astimezone() < close_time:
+                    self.set_open()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+                    break
+                else:
+                    self.set_closed()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+                    break
         
         for ride in ride_page['Results']:
             if ride['VenueId'] == self.getId():
                 self._make_attraction(ride)
-
+    
         
         for show in show_page['Results']:
             if show['VenueId'] == self.getId():
@@ -60,7 +96,15 @@ class UniversalPark(Park):
             attraction.setTime(-9)
         elif ride['WaitTime'] == -7:
             attraction.setTime(0)
-            atraction.setOpen()
+            attraction.setOpen()
+        elif ride['WaitTime'] == -5:
+            attraction.setClosed()
+            attraction.setTime(-1)
+            attraction.setStatus('Capacity')
+        elif ride['WaitTime'] == -4:
+            attraction.setClosed()
+            attraction.setTime(-1)
+            attraction.setStatus('Weather')
         elif ride['WaitTime'] < 0:
             attraction.setClosed()
             
