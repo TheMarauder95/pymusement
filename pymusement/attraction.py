@@ -10,7 +10,7 @@ class Attraction(dict):
     def __setitem__(self, key, value):
         if key not in self._keys:
             raise Exception("'" + key + "'" + " is not a valid key")
-        super().__setitem__(self, key, value)
+        super().__setitem__(key, value)
 
     def _addKeys(self, array):
         for key in array:
