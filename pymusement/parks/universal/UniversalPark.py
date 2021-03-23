@@ -95,7 +95,7 @@ class UniversalPark(Park):
         if ride['WaitTime'] == -9:
             attraction.setOpen()
             attraction.setTime(0)
-            attraction.setStatus('VLO')
+            attraction.setStatus('Virtual Line Only')
         elif ride['WaitTime'] == -8:
             attraction.setClosed()
             attraction.setTime(-1)
@@ -119,8 +119,8 @@ class UniversalPark(Park):
 
         else:
             attraction.setTime(ride['WaitTime'])
-        
-        attraction.setVirtualLine(ride['VirtualLine'])
+            attraction.setStatus('Operating')
+        attraction.set_skip_line(ride['VirtualLine'])
         
         
         
