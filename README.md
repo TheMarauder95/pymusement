@@ -30,12 +30,12 @@ Based on amusement by rambleraptor
 
 | Park Name                     | Rides       | Shows       |
 | ------------------------------|-------------|-------------|
-| Magic Kingdom                 |             |             |
-| Epcot                         |             |             |
-| Hollywood Studios             |             |             |
-| Animal Kingdom                |             |             |
-| Disneyland                    |             |             |
-| Disney's California Adventure |             |             |
+| Magic Kingdom                 |x            |             |
+| Epcot                         |x            |             |
+| Hollywood Studios             |x            |             |
+| Animal Kingdom                |x            |             |
+| Disneyland                    |x            |             |
+| Disney's California Adventure |x            |             |
 | Universal Studios Florida     |x            |x            |
 | Islands of Adventure          |x            |x            |
 | Universal Studios Hollywood   |x            |x            |
@@ -43,6 +43,5 @@ Based on amusement by rambleraptor
 | Hersheypark                   |x            |             |
 
 ## Work to be done
-* Fix API for Disney Parks,
 * Find alternative for Seaworld parks
 * Add Six Flags parks
