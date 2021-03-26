@@ -89,9 +89,9 @@ class UniversalPark(Park):
             attraction.setOpen()
 
         if ride['WaitTime'] == -50:
-            attraction.setTime(-1)
-            attraction.setStatus('Unknown')
-            attraction.setClosed()
+            attraction.setTime(0)
+            attraction.setStatus('No Times Left')
+            attraction.setOpen()
         if ride['WaitTime'] == -9:
             attraction.setOpen()
             attraction.setTime(0)
