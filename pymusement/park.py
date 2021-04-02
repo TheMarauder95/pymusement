@@ -12,6 +12,7 @@ class Park(object):
         self.is_Open = False
         self.Capacity = False
         self.park_hours = ''
+        self.name = ''
 
     def set_open(self):
         self.is_Open = True
@@ -42,10 +43,12 @@ class Park(object):
         self.name = name
 
     def getName(self):
-        raise('This must be implemented')
+        raise('this must be implemented')
     
-    def get_park_hours():
-        raise('This must be implemented')
+    def get_park_hours(self):
+        if self.park_hours == '':
+            self._buildPark()
+        return  self.park_hours
     
     def _buildPark(self):
         raise('This must be implemented')
