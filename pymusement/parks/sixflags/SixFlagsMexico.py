@@ -1,8 +1,8 @@
 from pymusement.parks.sixflags.SixFlagsPark import SixFlagsPark
     
-class SixFlagsMéxico(SixFlagsPark):
+class SixFlagsMexico(SixFlagsPark):
     def __init__(self):
-        super(SixFlagsMéxico, self).__init__()
+        super(SixFlagsMexico, self).__init__()
 
     def getId(self):
         return 28

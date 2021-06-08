@@ -25,7 +25,7 @@ from pymusement.parks.sixflags.SixFlagsNewEngland import SixFlagsNewEngland
 from pymusement.parks.sixflags.SixFlagsHurricaneHarborJackson import SixFlagsHurricaneHarborJackson
 from pymusement.parks.sixflags.TheGreatEscape import TheGreatEscape
 from pymusement.parks.sixflags.SixFlagsWhiteWaterAtlanta import SixFlagsWhiteWaterAtlanta
-from pymusement.parks.sixflags.SixFlagsMéxico import SixFlagsMéxico
+from pymusement.parks.sixflags.SixFlagsMexico import SixFlagsMexico
 from pymusement.parks.sixflags.LaRondeMontreal import LaRondeMontreal
 from pymusement.parks.sixflags.SixFlagsHurricaneHarborOaxtepec import SixFlagsHurricaneHarborOaxtepec
 from pymusement.parks.sixflags.SixFlagsHurricaneHarborConcord import SixFlagsHurricaneHarborConcord
@@ -64,7 +64,7 @@ PARKS = {
 	'six-flags-hurricane-harbor-jackson' : SixFlagsHurricaneHarborJackson(),
 	'the-great-escape' : TheGreatEscape(),
 	'six-flags-white-water-atlanta' : SixFlagsWhiteWaterAtlanta(),
-	'six-flags-méxico' : SixFlagsMéxico(),
+	'six-flags-mexico' : SixFlagsMexico(),
 	'la-ronde-montreal' : LaRondeMontreal(),
 	'six-flags-hurricane-harbor-oaxtepec' : SixFlagsHurricaneHarborOaxtepec(),
 	'six-flags-hurricane-harbor-concord' : SixFlagsHurricaneHarborConcord(),
