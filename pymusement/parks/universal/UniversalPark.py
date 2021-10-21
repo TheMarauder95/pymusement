@@ -42,13 +42,17 @@ class UniversalPark(Park):
         
         for date in hour_page:
             if datetime.date.fromisoformat(date['Date']) == datetime.date.today():
-                if 'capacity' in date['VenueStatus'].lower():
-                    self.Capacity = True
-                    break
-                else:
+                try:
+                    if 'capacity' in date['VenueStatus'].lower():
+                        self.Capacity = True
+                        break
+                    else:
+                        self.Capacity = False
+                        break
+                except:
                     self.Capacity = False
                     break
-    
+
     def _buildPark(self):
         token = self._get_token()
         ride_page = self._get_request(token, RIDE_URL)
