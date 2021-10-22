@@ -12,5 +12,5 @@ class ShowTestCase(unittest.TestCase):
     def test_addTime(self):
         show_obj = Show()
         show_obj.addTime('12:00 PM')
-        self.assertEqual(len(show_obj.getTimes()), 1)
+        self.assertEqual(len(show_obj.getTimes()), 2)
 

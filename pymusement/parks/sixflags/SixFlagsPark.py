@@ -69,6 +69,10 @@ class SixFlagsPark(Park):
             attraction.setOpen()
         else:
             attraction.setClosed()
+        try:
+            int(ride['waitTime'])
+        except ValueError:
+            ride['waitTime'] = ''.join(c for c in ride['waitTime'] if c.isdigit())
         attraction.setTime(ride['waitTime'])
         attraction.set_skip_line(meta['isFlashPassEligible'])
         
