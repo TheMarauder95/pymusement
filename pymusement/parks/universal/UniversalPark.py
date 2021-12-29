@@ -119,8 +119,10 @@ class UniversalPark(Park):
             attraction.setClosed()
             attraction.setTime(-1)
             attraction.setStatus('Closed')
-            
-
+        elif ride['WaitTime'] == 900:
+            attraction.setClosed()
+            attraction.setTime(-1)
+            attraction.setStatus('Closed Temporarily')
         else:
             attraction.setTime(ride['WaitTime'])
             attraction.setStatus('Operating')
