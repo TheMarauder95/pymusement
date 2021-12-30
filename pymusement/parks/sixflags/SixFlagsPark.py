@@ -65,6 +65,14 @@ class SixFlagsPark(Park):
         attraction.setName(meta['name'])
         attraction.setStatus(meta['status'])
         
+        #Check if Park is Open
+        if not self.is_Open:
+            attraction.setTime(0)
+            attraction.setClosed()
+            attraction.set_skip_line(meta['isFlashPassEligible'])
+            self.addRide(attraction)
+            return
+
         if meta['status'] == 'AttractionStatusOpen':
             attraction.setOpen()
         else:
