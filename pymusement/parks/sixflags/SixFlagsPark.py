@@ -42,6 +42,8 @@ class SixFlagsPark(Park):
         
         
         hours = hour_page['operatingHours'][0]
+
+
         open_time, close_time = datetime.datetime.fromisoformat(hours['open']), datetime.datetime.fromisoformat(hours['close'])
         self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
            
@@ -53,6 +55,10 @@ class SixFlagsPark(Park):
             self.set_closed()
             self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
                 
+        #######DEBUG########
+        print(hours)
+        print(self.park_hours)
+        print(self.is_Open)
         
         
         
@@ -81,9 +87,12 @@ class SixFlagsPark(Park):
             int(ride['waitTime'])
         except ValueError:
             ride['waitTime'] = ''.join(c for c in ride['waitTime'] if c.isdigit())
+        except TypeError:
+            if ride['waitTime']: raise ValueError
+            else: ride['waitTime'] = 0
         attraction.setTime(ride['waitTime'])
         attraction.set_skip_line(meta['isFlashPassEligible'])
-        
+
         
         
         
