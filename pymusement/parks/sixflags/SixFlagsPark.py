@@ -40,28 +40,26 @@ class SixFlagsPark(Park):
             
         ride_info = {x['rideId']:x for x in metadata_page['rides']}
         
-        
-        hours = hour_page['operatingHours'][0]
+        try:
+            hours = hour_page['operatingHours'][0]
 
-
-        open_time, close_time = datetime.datetime.fromisoformat(hours['open']), datetime.datetime.fromisoformat(hours['close'])
-        self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
-           
-        if open_time < datetime.datetime.now() < close_time:
-            self.set_open()
+            open_time, close_time = datetime.datetime.fromisoformat(hours['open']), datetime.datetime.fromisoformat(hours['close'])
             self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
-           
-        else:
-            self.set_closed()
-            self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+               
+            if open_time < datetime.datetime.now() < close_time:
+                self.set_open()
+                self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+               
+            else:
+                self.set_closed()
+                self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
                 
-        #######DEBUG########
-        print(hours)
-        print(self.park_hours)
-        print(self.is_Open)
-        
-        
-        
+        except IndexError:
+            self.set_closed()
+            self.park_hours = 'Closed'
+            
+            
+               
         
         for ride in ride_page['rideStatuses']:
             self._make_attraction(ride,ride_info[ride['rideId']])
