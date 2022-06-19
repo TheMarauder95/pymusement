@@ -41,8 +41,10 @@ class SixFlagsPark(Park):
         ride_info = {x['rideId']:x for x in metadata_page['rides']}
         
         try:
-            hours = hour_page['operatingHours'][0]
+            for time in hour_page['operatingHours']:
+                if datetime.datetime.fromisoformat(time['operatingDate']).date() == datetime.date.today():
 
+                    hours = time
             open_time, close_time = datetime.datetime.fromisoformat(hours['open']), datetime.datetime.fromisoformat(hours['close'])
             self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
                
