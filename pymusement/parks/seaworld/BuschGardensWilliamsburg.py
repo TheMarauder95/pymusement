@@ -6,7 +6,7 @@ class BuschGardensWilliamsburg(SeaworldPark):
         super(BuschGardensWilliamsburg, self).__init__()
 
     def getId(self):
-        return 'buschgardens'
+        return '45FE1F31-D4E4-4B1E-90E0-5255111070F2'
 
     def getName(self):
         return 'Busch Gardens Williamsburg'

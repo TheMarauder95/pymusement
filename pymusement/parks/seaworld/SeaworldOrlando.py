@@ -6,9 +6,10 @@ class SeaworldOrlando(SeaworldPark):
         super(SeaworldOrlando, self).__init__()
 
     def getId(self):
-        return 'seaworld'
+        return 'AC3AF402-3C62-4893-8B05-822F19B9D2BC'
 
     def getName(self):
         return 'Seaworld Orlando'
     def getCity(self):
         return 'orlando'
+park = SeaworldOrlando()

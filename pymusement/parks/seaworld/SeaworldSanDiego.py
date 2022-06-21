@@ -6,7 +6,7 @@ class SeaworldSanDiego(SeaworldPark):
         super(SeaworldSanDiego, self).__init__()
 
     def getId(self):
-        return 'seaworld'
+        return '4325312F-FDF1-41FF-ABF4-361A4FF03443'
 
     def getName(self):
         return 'Seaworld San Diego'

@@ -1,59 +1,80 @@
 #!/usr/bin/env python
 import requests
-from bs4 import BeautifulSoup as bs
 from pymusement.park import Park
 from pymusement.ride import Ride
 from pymusement.show import Show
+import datetime
 
-PARK_URL_FORMAT = 'https://{0}.com/{1}/ride-wait-times/'
-#SHOW_URL_FORMAT = 'https://seas.te2.biz/v1/rest/venue/{0}/shows/{1}'
+PARK_URL = 'https://public.api.seaworld.com/v1/park/{0}/'
+RIDE_URL = 'https://public.api.seaworld.com/v1/park/{0}/availability'
+#SHOW_URL = 'https://seas.te2.biz/v1/rest/venue/{0}/shows/{1}'
 
 class SeaworldPark(Park):
         
     def __init__(self):
         super(SeaworldPark, self).__init__()
-        self._park_url = PARK_URL_FORMAT.format(self.getId(), self.getCity())
-
+        self._park_url = PARK_URL.format(self.getId())
+        self._ride_url = RIDE_URL.format(self.getId())
 
     def _buildPark(self):
-        parsed_page = self._get_page(self._park_url)
-        for poi in parsed_page:
-            self._build_ride(poi)
+        parsed_page = requests.get(self._park_url).json()
+        wait_times = requests.get(self._ride_url).json()
+        times = wait_times['WaitTimes']
+        wait_times = { x['Id']:x['Minutes'] for x in times }
+        ride_status = { x['Id']:x['Status'] for x in times }
+        hour_page = parsed_page['open_hours']
+        
+        
+        for date in hour_page:
+                open_time, close_time = datetime.datetime.fromisoformat(date['opens_at'][:-1]), datetime.datetime.fromisoformat(date['closes_at'][:-1])
 
-       # parsed_page = self._get_page(self._show_url)
-        #for poi in parsed_page:
-      #      self._build_show(poi)
+                if open_time < datetime.datetime.now() < close_time:
+                    self.set_open()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+                    break
+                else:
+                    self.set_closed()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+                    break
+        
+        for ride in parsed_page['POIs']['Rides']:
+            try:
+                ride.update({'WaitTime':wait_times[ride['Id']]})
+            except KeyError:
+                ride.update({'WaitTime':0})
+            try:
+                ride.update({'Status':ride_status[ride['Id']]})
+            except KeyError:
+                pass
+            self._make_attraction(ride)
 
-    def _get_page(self, url):
-        # Make page request, return Beautiful Soup request
-        response = requests.get(url) 
-        soup = bs(response.text,'html.parser')
-        table = soup.find_all('div',{'class':'row ride-times-wrapper'})
-        return table
-
-    def _build_ride(self, poi):
+    def _make_attraction(self, ride):
         # Create dictionary with attraction information
-        ride = Ride()
+        attraction = Ride()
         
-        name = poi.find('div',{'class':'col-xs-6 col-md-6 ride-times-title'}).text
-        time = poi.find('div',{'col-xs-4 col-md-4 ride-times-hours'})
-        if time == None:
-            time = 'Closed'
-        else: time = time.text
+        attraction.setName(ride['Name'])
         
+        if not self.is_Open:
+            attraction.setTime(0)
+            attraction.setClosed()
+            self.addRide(attraction)
+            return
         
-        ride.setName(name)
-        if time == 'Closed':
-            ride.setTime(-1)
-            ride.setClosed()
-        else: 
-            time = time.split()[0]
-            ride.setTime(time)
-            ride.setOpen()
+        if ride['WaitTime'] is None:
+            attraction.setClosed()
+        else:
+            attraction.setOpen() 
         
-        self.addRide(ride)
+        if ride['WaitTime'] == -1:
+            attraction.setClosed()
+            attraction.setTime(-1)
+            attraction.setStatus(ride['Status'])
+        else:
+            attraction.setTime(ride['WaitTime'])
+            attraction.setStatus('Operating')
+            
+            
+        self.addRide(attraction)
+        
 
-  #  def _build_show(self, row):
-      #  result = Show()
-
-  #      self.addShow(result)
+ 
