@@ -35,6 +35,13 @@ from pymusement.parks.sixflags.SixFlagsDarienLake import SixFlagsDarienLake
 from pymusement.parks.sixflags.SixFlagsHurricaneHarborPhoenix import SixFlagsHurricaneHarborPhoenix
 from pymusement.parks.sixflags.SixFlagsHurricaneHarborSplashTown import SixFlagsHurricaneHarborSplashTown
 from pymusement.parks.sixflags.SixFlagsHurricaneHarborRockford import SixFlagsHurricaneHarborRockford
+from pymusement.parks.seaworld.SeaworldOrlando import SeaworldOrlando
+from pymusement.parks.seaworld.BuschGardensTampa import BuschGardensTampa
+from pymusement.parks.seaworld.SeaworldSanAntonio import SeaworldSanAntonio
+from pymusement.parks.seaworld.SeaworldSanDiego import SeaworldSanDiego
+from pymusement.parks.seaworld.BuschGardensWilliamsburg import BuschGardensWilliamsburg
+
+
 
 PARKS = {
     'universal-florida' : UniversalStudiosFlorida(),
@@ -73,5 +80,10 @@ PARKS = {
 	'six-flags-darien-lake' : SixFlagsDarienLake(),
 	'six-flags-hurricane-harbor-phoenix' : SixFlagsHurricaneHarborPhoenix(),
 	'six-flags-hurricane-harbor-splashtown' : SixFlagsHurricaneHarborSplashTown(),
-	'six-flags-hurricane-harbor-rockford' : SixFlagsHurricaneHarborRockford()
+	'six-flags-hurricane-harbor-rockford' : SixFlagsHurricaneHarborRockford(),
+	'seaworld-orlando' : SeaworldOrlando(),
+    'busch-gardens-tampa' : BuschGardensTampa(),
+    'seaworld-san-antonio' : SeaworldSanAntonio(),
+    'seaworld-san-diego' : SeaworldSanDiego(),
+    'busch-gardens-williamsburg' : BuschGardensWilliamsburg()
 }
