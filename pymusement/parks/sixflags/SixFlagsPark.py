@@ -41,20 +41,26 @@ class SixFlagsPark(Park):
         ride_info = {x['rideId']:x for x in metadata_page['rides']}
         
         try:
+            hours = -1
             for time in hour_page['operatingHours']:
                 if datetime.datetime.fromisoformat(time['operatingDate']).date() == datetime.date.today():
 
                     hours = time
-            open_time, close_time = datetime.datetime.fromisoformat(hours['open']), datetime.datetime.fromisoformat(hours['close'])
-            self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
-               
-            if open_time < datetime.datetime.now() < close_time:
-                self.set_open()
-                self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
-               
-            else:
+                    break
+            if hours == -1:
                 self.set_closed()
+                self.park_hours = 'Closed'
+            else:
+                open_time, close_time = datetime.datetime.fromisoformat(hours['open']), datetime.datetime.fromisoformat(hours['close'])
                 self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+               
+                if open_time < datetime.datetime.now() < close_time:
+                    self.set_open()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
+                
+                else:
+                    self.set_closed()
+                    self.park_hours = open_time.time().strftime('%r') + ' ' + close_time.time().strftime('%r')
                 
         except IndexError:
             self.set_closed()
