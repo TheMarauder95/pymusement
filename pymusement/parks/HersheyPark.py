@@ -4,8 +4,8 @@ from pymusement.park import Park
 from pymusement.ride import Ride
 
 class HersheyPark(Park):
-    _park_url = 'https://hpapp.hersheypa.com/v1/rides'
-    _wait_url = 'https://hpapp.hersheypa.com/v1/rides/wait' 
+    _park_url = 'https://hpapp.hersheypa.com/v2/rides'
+    _wait_url = 'https://hpapp.hersheypa.com/v2/rides/wait' 
 
 
     def __init__(self):
@@ -24,7 +24,8 @@ class HersheyPark(Park):
 
     def get_page(self, url):
         # Make page request, return Beautiful Soup request
-        response = requests.get(url, timeout=3)
+        headers={'User-Agent':'Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion'}
+        response = requests.get(url, headers=headers,timeout=3)
         return response.json()
 
     def _build_attr(self, row, wait_page):
