@@ -23,14 +23,14 @@ def print_rides(ride_array):
             # make sure the times are aligned b/c closed longer than open
             if one_closed:
                 line += ' ' * 2
+            line += ' ' * 5
+            if ride['wait'] == -9:
+                line += 'Virtual Line'
+            else:
+                line += str(ride['wait']) + ' mins'
         else:
             line += 'Closed'
 
-        line += ' ' * 5
-        if ride['wait'] == -9:
-            line += 'Virtual Line'
-        else:
-            line += str(ride['wait']) + ' mins'
         click.echo(line)
 
 def print_shows(show_array):
