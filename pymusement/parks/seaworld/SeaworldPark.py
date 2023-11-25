@@ -23,8 +23,6 @@ class SeaworldPark(Park):
         wait_times = { x['Id']:x['Minutes'] for x in times }
         ride_status = { x['Id']:x['Status'] for x in times }
         hour_page = parsed_page['open_hours']
-        
-        
         for date in hour_page:
                 open_time, close_time = datetime.datetime.fromisoformat(date['opens_at'][:-1]), datetime.datetime.fromisoformat(date['closes_at'][:-1])
 
@@ -41,24 +39,22 @@ class SeaworldPark(Park):
             try:
                 ride.update({'WaitTime':wait_times[ride['Id']]})
             except KeyError:
-                ride.update({'WaitTime':0})
+                ride.update({'WaitTime':-1})
             try:
                 ride.update({'Status':ride_status[ride['Id']]})
             except KeyError:
-                pass
+                ride.update({'Status':''})
             self._make_attraction(ride)
-
     def _make_attraction(self, ride):
         # Create dictionary with attraction information
         attraction = Ride()
-        
         attraction.setName(ride['Name'])
         
-        if not self.is_Open:
-            attraction.setTime(0)
-            attraction.setClosed()
-            self.addRide(attraction)
-            return
+       # if not self.is_Open:
+       #     attraction.setTime(0)
+       #     attraction.setClosed()
+       #     self.addRide(attraction)
+       #     return
         
         if ride['WaitTime'] is None:
             attraction.setClosed()
