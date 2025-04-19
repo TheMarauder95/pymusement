@@ -24,8 +24,8 @@ def print_rides(ride_array):
             if one_closed:
                 line += ' ' * 2
             line += ' ' * 5
-            if ride['wait'] == -9:
-                line += 'Virtual Line'
+            if ride['status'] == 'Virtual Line Only':
+                line += 'Virtual Line Only'
             else:
                 line += str(ride['wait']) + ' mins'
         else:

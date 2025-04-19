@@ -2,6 +2,7 @@ from pymusement.parks.universal.UniversalStudiosFlorida import UniversalStudiosF
 from pymusement.parks.universal.IslandsOfAdventure import IslandsOfAdventure
 from pymusement.parks.universal.UniversalHollywood import UniversalHollywood
 from pymusement.parks.universal.UniversalVolcano import UniversalVolcano
+from pymusement.parks.universal.UniversalEpicUniverse import UniversalEpicUniverse
 from pymusement.parks.HersheyPark import HersheyPark
 from pymusement.parks.disney.AnimalKingdom import AnimalKingdom
 from pymusement.parks.disney.CaliforniaAdventure import CaliforniaAdventure
@@ -48,6 +49,7 @@ PARKS = {
     'islands-adventure' : IslandsOfAdventure(),
     'universal-hollywood' : UniversalHollywood(),
     'volcano-bay' : UniversalVolcano(),
+    'epic-universe' : UniversalEpicUniverse(),
     'hersheypark' : HersheyPark(),
     'magic-kingdom' : MagicKingdom(),
     'animal-kingdom' : AnimalKingdom(),

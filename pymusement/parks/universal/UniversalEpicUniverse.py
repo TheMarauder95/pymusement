@@ -1,8 +1,8 @@
 from pymusement.parks.universal.UniversalPark import UniversalPark
 
-class UniversalStudiosFlorida(UniversalPark):
+class UniversalEpicUniverse(UniversalPark):
     def __init__(self):
-        super(UniversalStudiosFlorida, self).__init__()
+        super(UniversalEpicUniverse, self).__init__()
 
     def getId(self):
         return 24000
